@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+    <title>quiz</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300i,400,400i,700,700i,900,900i" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Sonsie+One" rel="stylesheet">
+	<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="css/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+	<link rel="stylesheet" type="text/css" href="css/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/slick/slick.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- owl carousel CSS -->
+    <link rel="stylesheet" href="css/owl-carousel/owl.carousel.min.css">
+   <link rel="stylesheet" href="css/owl-carousel/owl.theme.default.min.css"> 
+    <style>
+        body        { padding-top:80px; word-wrap:break-word; }
+    </style>
+</head>
+<body>
+        
+        <div class="page-header text-center">
+                <h1><span class="fa"></span> Quiz Page</h1>
+                <a href="/auth/logout" class="btn btn-default btn-sm">Logout</a>
+            </div>
+    <!-- Team -->
+	    <section id = "profile" style="padding-top: 4em;">
+            <div class="content-box">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                <div class="card card-default">
+                                  <div class="card-body">
+                                    <p style="padding: 3em; background-color: #DC143C;" align="center">MODULE 1</p>
+                                  </div>
+                                  <div align="center" class="card-footer">
+                                      <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                  </div>
+                                </div>		
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <span id="module-name" style="font-weight: 600; font-size: 2em;">MODULE 1 CONCENTRATION</span>
+                            <p id="module-purpose">Write the purpose of this module</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <br><br><br><br><br><br>
+        <section id="quiz">
+                <div class="container" style="">
+                    <div class="row" style="margin-left: 1em;">
+                        <p style="font-size: 1.5em;"><b>Q1. </b><%= question.question %></p>
+                        
+                        <br><br>
+                        <form action="/auth/saveResult" method="post">
+                            <p style="font-weight: 800; font-size: 1.2em; padding: 0em; margin: 0em;">Options:</p>
+                            <div id="quiz-options">
+                                <div class="row">
+                                    <div class="col-sm-5" style="padding: 3em;">
+                                    <label><input type="radio" name="optradio" id="o" onclick="ans()" value="<%= question.option1 %>"> <%= question.option1 %></label>
+                                    </div>
+                                    <div class="col-sm-5" style="padding: 3em;">
+                                    <label><input type="radio" name="optradio" id="o" value="<%= question.option2 %>"><%= question.option2 %></label>
+                                    </div>
+                                    <div class="col-sm-5" style="padding: 3em;">
+                                    <label><input type="radio" name="optradio" id="o" value="<%= question.option3 %>"> <%= question.option3 %></label>
+                                    </div>
+                                    <div class="col-sm-5" style="padding: 3em;">
+                                    <label><input type="radio" name="optradio"id="o" value="<%= question.option4 %>"> <%= question.option4 %></label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <input class="btn btn-success" style="padding-left: 1em; padding-right: 1em; font-size: 1.7em;" type="button" value="Submit" style="margin-left: 3em;">
+                        </form>
+                    </div>
+                </div>
+            </section>
+            
+            
+            <br><br><br><br><br><br><br><br><br><br><br><br><br>
+            
+    <script>
+
+        function ans(){
+            if (document.getElementById('o').checked) {
+                const  answer = document.getElementById('o').value;
+                const question_id="<%= question._id %>";
+                $.post('/auth/saveResult',
+                {
+                    q_id:question_id,
+                    a:answer
+                });
+            }
+            
+        }
+        // $('input[name="optradio"]').on("click", function() {
+
+        //     if (document.getElementById('o').checked) {
+        //         const  answer = document.getElementById('o').value;
+        //         // console.log(answer);
+        //     }
+        // });
+        
+    
+    
+    </script>
+    
+
+</body>
+</html>
